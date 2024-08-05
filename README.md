@@ -21,37 +21,36 @@ function weatherForecastV2(){
   if(date < 10){
     date = "0"+date;
   }
-
-      var apiKey = "API授權碼";
-      var search_code = "F-D0047-067";
-      var weathrerDay = year+"-"+month+"-"+date;
-      var rural_areas = "高雄市鄉區 ex:岡山區";
-      //不能使用http，會無回應或報錯
-      var apiCall = "https://opendata.cwa.gov.tw/api/v1/rest/datastore/" search_code + "?Authorization="+ apiKey + "&limit=1&format=JSON&locationName="+ rural_areas + "&elementName=&timeFrom=" + weathrerDay+"T06%3A00%3A00&timeTo=" + weathrerDay + "T18%3A00%3A00";
+  var apiKey = "API授權碼";
+  var search_code = "F-D0047-067";
+  var weathrerDay = year+"-"+month+"-"+date;
+  var rural_areas = "高雄市鄉區 ex:岡山區";
+  //不能使用http，會無回應或報錯
+  var apiCall = "https://opendata.cwa.gov.tw/api/v1/rest/datastore/" search_code + "?Authorization="+ apiKey + "&limit=1&format=JSON&locationName="+ rural_areas + "&elementName=&timeFrom=" + weathrerDay+"T06%3A00%3A00&timeTo=" + weathrerDay + "T18%3A00%3A00";
       
-      var response = UrlFetchApp.fetch(apiCall);
-      var data = JSON.parse(response.getContentText());
-      //Logger.log(response.getResponseCode());
-      if (data.cod === "404") { // City not found
-        var errorMsg = "發生錯誤";
-        return errorMsg;
-      }
-      if(response.getResponseCode() == 200){
-        var text = data["success"];
-        var today = data["records"];
-        var weather = today["locations"][0];
-        var weather2 = weather["location"][0];
-        var weather3 = weather2["weatherElement"][6];
-        var weather4 = weather3["time"][0];
-        var weather5 = weather4["elementValue"][0];
-        var weatherDesc = weather5["value"];
-        var weather6 = weather4["elementValue"][1];
-        var weatherDescCode = weather6["value"];
-        let arr = []; 
-        arr[0] = weatherDesc;
-        arr[1] = weatherDescCode;
-        //Logger.log(arr[0]+","+arr[1]);
-        return arr;
-      }
+  var response = UrlFetchApp.fetch(apiCall);
+  var data = JSON.parse(response.getContentText());
+  //Logger.log(response.getResponseCode());
+  if (data.cod === "404") { // City not found
+     var errorMsg = "發生錯誤";
+     return errorMsg;
+}
+if(response.getResponseCode() == 200){
+   var text = data["success"];
+   var today = data["records"];
+   var weather = today["locations"][0];
+   var weather2 = weather["location"][0];
+   var weather3 = weather2["weatherElement"][6];
+   var weather4 = weather3["time"][0];
+   var weather5 = weather4["elementValue"][0];
+   var weatherDesc = weather5["value"];
+   var weather6 = weather4["elementValue"][1];
+   var weatherDescCode = weather6["value"];
+   let arr = []; 
+   arr[0] = weatherDesc;
+   arr[1] = weatherDescCode;
+   //Logger.log(arr[0]+","+arr[1]);
+   return arr;
+   }
 }
     ```
