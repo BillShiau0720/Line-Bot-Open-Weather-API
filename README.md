@@ -60,6 +60,8 @@ if(response.getResponseCode() == 200){
 ```
 
 # STEP 3 使用LineBot API傳送給使用者
+LineBot憑證  
+https://manager.line.biz/account/@351uvhwa/setting/messaging-api
 ```js
 function doPost(e) {
 var mdateMSG = "";
