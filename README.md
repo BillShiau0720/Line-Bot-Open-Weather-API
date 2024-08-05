@@ -53,7 +53,8 @@ if(response.getResponseCode() == 200){
    return arr;
    }
 }
-    ```
+```
+
 # STEP 3 使用LineBot API傳送給使用者
 ```js
 function doPost(e) {
@@ -95,3 +96,5 @@ function doPost(e) {
     });
 }
  ```
+# STEP 4 完成
+![image](https://github.com/BillShiau0720/LineBot-OpenWeather_API/blob/main/Step1.jpg)
