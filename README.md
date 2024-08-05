@@ -1,5 +1,5 @@
 # LineBot + Open-Weather-API
-使用Google App Script寫腳本，抓取氣象局API氣象資料並分析，再將其資料透過LineBot API傳送給使用著。
+使用Google App Script寫腳本，抓取氣象局API氣象資料並分析，再將其資料透過LineBot API傳送給使用者。
 # STEP 1 創建Google App Script專案
 ![image](https://github.com/BillShiau0720/LineBot-OpenWeather_API/blob/main/Step1.jpg)
 # STEP 2 抓取氣象局API氣象資料並分析(此範例為高雄市，如要別的城市就需要替換search_code)
@@ -54,3 +54,44 @@ if(response.getResponseCode() == 200){
    }
 }
     ```
+# STEP 3 使用LineBot API傳送給使用者
+```js
+function doPost(e) {
+  let arr = []; 
+  arr = weatherForecastV2();
+  Logger.log(arr[0]+","+arr[1]);
+  var desc = arr[0];
+  var code = arr[1];
+  var codeMsg;
+
+   if(code == 1){
+     codeMsg = "🌞🌞🌞";
+   }else if(code == 2 || code == 3){
+     codeMsg = "🌥️🌥️🌥️";
+   }else if(code >3 & code <=7) {
+     codeMsg = "☁️☁️☁️";
+   }else if(code >=8 & code <=14){
+     codeMsg = "🌧️🌧️🌧️";
+   }else{
+     codeMsg = "⛈️⛈️⛈️";
+   }
+
+   var weatherMsg;
+   weatherMsg = "今天天氣是"+desc+codeMsg;
+
+   UrlFetchApp.fetch(url, {
+     'headers': {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + CHANNEL_ACCESS_TOKEN,
+     },
+      'method': 'post',
+      'payload': JSON.stringify({
+        'to':  groupid,
+       'messages': [{
+          type:'text',
+          text:mdateMSG + "," +weatherMsg
+        }]
+      }),
+    });
+}
+ ```
