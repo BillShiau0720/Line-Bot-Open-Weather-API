@@ -4,9 +4,9 @@
 ![image](https://github.com/BillShiau0720/LineBot-OpenWeather_API/blob/main/Step1.jpg)
 # STEP 2 抓取氣象局API氣象資料並分析(此範例為高雄市，如要別的城市就需要替換search_code)
 API授權碼
-https://opendata.cwa.gov.tw/user/authkey
+https://opendata.cwa.gov.tw/user/authkey  
 search_code
-https://opendata.cwa.gov.tw/dist/opendata-swagger.html?urls.primaryName=openAPI#/
+https://opendata.cwa.gov.tw/dist/opendata-swagger.html?urls.primaryName=openAPI#/  
 ```js
 function weatherForecastV2(){
   var time = new Date();
