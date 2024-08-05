@@ -3,6 +3,8 @@
 # STEP 1 創建Google App Script專案
 ![image](https://github.com/BillShiau0720/LineBot-OpenWeather_API/blob/main/Step1.jpg)
 # STEP 2 抓取氣象局API氣象資料並分析(此範例為高雄市，如要別的城市就需要替換search_code)
+API授權碼
+https://opendata.cwa.gov.tw/user/authkey
 ```js
 function weatherForecastV2(){
   var time = new Date();
