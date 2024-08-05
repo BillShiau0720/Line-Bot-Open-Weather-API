@@ -58,6 +58,49 @@ if(response.getResponseCode() == 200){
 # STEP 3 使用LineBot API傳送給使用者
 ```js
 function doPost(e) {
+var mdateMSG = "";
+var time = new Date();
+var year = time.getYear();
+year = year+1900;
+var month = time.getMonth();
+f(month==0){
+  month=1
+}else{
+  month=month+1;
+}
+var date = time.getDate();
+var eattimem = time.getMinutes();
+var eattimeh = time.getHours();
+var weekday = time.getUTCDay();   //抓星期幾
+var weekdaystring='';              
+var groupid = "Line使用者ID";
+var CHANNEL_ACCESS_TOKEN = "LineBot憑證";
+var url = 'https://api.line.me/v2/bot/message/push';
+
+if(weekday==6){
+  weekdaystring='星期天'
+  mdateMSG='早安~今天日期是:'+year+'年'+month+'月'+date+'日 '+weekdaystring
+}else if(weekday==0){
+  weekdaystring='星期一'
+  mdateMSG='早安~今天日期是:'+year+'年'+month+'月'+date+'日 '+weekdaystring
+}else if(weekday==1){
+  weekdaystring='星期二'
+  mdateMSG='早安~今天日期是:'+year+'年'+month+'月'+date+'日 '+weekdaystring
+}else if(weekday==2){
+  weekdaystring='星期三'
+  mdateMSG='早安~今天日期是:'+year+'年'+month+'月'+date+'日 '+weekdaystring
+}else if(weekday==3){
+  weekdaystring='星期四'
+  mdateMSG='早安~今天日期是:'+year+'年'+month+'月'+date+'日 '+weekdaystring
+}else if(weekday==4){
+  weekdaystring='星期五'
+  mdateMSG='早安~今天日期是:'+year+'年'+month+'月'+date+'日 '+weekdaystring
+}else if(weekday==5){
+  weekdaystring='星期六'
+  mdateMSG='早安~今天日期是:'+year+'年'+month+'月'+date+'日 '+weekdaystring
+}else{
+  dateMSG='皮皮機器人發生錯誤!! Error code:'+weekday
+}
   let arr = []; 
   arr = weatherForecastV2();
   Logger.log(arr[0]+","+arr[1]);
@@ -97,4 +140,4 @@ function doPost(e) {
 }
  ```
 # STEP 4 完成
-![image](https://github.com/BillShiau0720/LineBot-OpenWeather_API/blob/main/Step1.jpg)
+![image](https://github.com/BillShiau0720/LineBot-OpenWeather_API/blob/main/Completed%20picture.jpg)
